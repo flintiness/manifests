@@ -10,9 +10,9 @@
            sync-j="4" />
 
 
-  <project path="androidcode.github.io" name="doc/androidcode.github.io" groups="flintiness" />
-  <project path="LossPackage" name="LossPackage" groups="flintiness" />
-  <project path="AndroidLogrorate" name="AndroidLogrorate" groups="flintiness" />
+  <project path="doc/androidcode.github.io" name="androidcode.github.io" groups="flintiness" />
+  <project path="linux/LossPackage" name="LossPackage" groups="flintiness" />
+  <project path="android/AndroidLogrorate" name="AndroidLogrorate" groups="flintiness" />
 
 
 </manifest>
