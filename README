@@ -1,0 +1,70 @@
+# Data   : 2020 04 01
+# Author : wenbo
+# Email  : user.wenbo@gmail.com
+
+
+manifest文件格式：
+
+	<?xml version="1.0" encoding="UTF-8"?>     #第一行必须加的，文本格式
+
+	--------------------------------------------------------------------------
+	<manifest>                                                                        # 配置的顶层元素，即根标志
+ 		<remote  name="origin"								# name :远程仓库的名字(每一个.git/config文件的remote项中用到这个name，即表示每个git的远程服务器的名字)
+           		fetch="https://github.com/flintiness"					# fetch :远程仓库的地址
+           		review="http://gerrit.allwinnertech.com:8081/ssh_info" /> 		# review :gerrit代码审核的地址(指定Gerrit的服务器名，用于repo upload操作。如果没有指定，则repo upload没有效果)
+
+        	<default revision="master"							# revision :为远程仓库项目默认的分支
+           		remote="origin"								# remote :为远程的仓库名
+           		sync-j="4" />								# repo sync 时并行运行的个数
+
+  		<project path="build" name="product/tina/build" groups="tina" >			# 项目1，path为同步到本地的相对路径，name为远程仓库的项目路径，实际同步时对象的是
+    			<copyfile src="top_main.mk" dest="Makefile" />				# 将Makefile复制到当前目录下，命名为top_main.mk
+    			<copyfile src="rules.mk" dest="rules.mk" />				
+  		</project>									# 项目1结束	
+  		<project path="config" name="product/tina/config" groups="tina" />              # 项目2，path为同步到本地目录的相对路径   /> 表示一个项目结束
+	
+	</manifest>									 # 结束标志
+	----------------------------------------------------------------------------
+
+
+	groups : 表示组的属性
+	sync_c ：如果设置为true，则只同步指定的分支(revision 属性指定)，而不是所有的ref内容
+	sync_s ： 如果设置为true，则会同步git的子项目
+	upstream ：在哪个git分支可以找到一个SHA1。用于同步revision锁定的manifest(-c 模式)。该模式可以避免同步整个ref空间
+
+	include :
+		通过name属性可以引入另外一个manifest文件(路径相对与当前的manifest.xml 的路径)
+		name ：另一个需要导入的manifest文件名字
+		可以在当前的路径下添加一个another_manifest.xml，这样可以在另一个xml中添加或删除project	
+		
+		--------------------------------------------------------------------------------------
+
+		<?xml version="1.0" encoding="UTF-8"?>
+		<manifest>
+  			<!-- remote repo and gerrit review -->
+  			<include name="remote.xml" />
+
+  			<!-- aosp default repository-->
+  			<include name="default.xml" />
+
+ 	 		<!-- remove project -->
+  			<include name="remove.xml" />
+
+  			<!-- rk checkout new default repository-->
+  			<include name="include/rk_checkout_from_aosp.xml" />
+  			<!-- rk modules repository-->
+  			<include name="include/rk_modules_repository.xml" />
+  			<include name="include/rk3399_repository.xml" />
+  			<include name="include/rk3326_repository.xml" />
+  			<include name="include/rk3126c_repository.xml" />
+		</manifest>
+
+		--------------------------------------------------------------------------------------
+
+
+git命令：
+	git merge --allow-unrelated-histories bar/somebranch   将somebranch将bar存储库中的分支合并到当前分支中，注意--allow-unrelated-histories在git版本2.9之前不需要
+	
+	
+repo 同步此项目的命令：
+	repo init --no-clone-bundle -u https://github.com/flintiness/manifests.git -b master -m flintiness_default.xml		
