@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+  <remote  name="origin"   
+           fetch="https://github.com/flintiness"
+           review="http://gerrit.allwinnertech.com:8081/ssh_info" />
+
+  <default revision="master"
+           remote="origin"
+           sync-j="4" />
+
+
+  <project path="androidcode.github.io" name="doc/androidcode.github.io" groups="flintiness" />
+  <project path="LossPackage" name="LossPackage" groups="flintiness" />
+  <project path="AndroidLogrorate" name="AndroidLogrorate" groups="flintiness" />
+
+
+</manifest>
