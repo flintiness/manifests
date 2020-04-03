@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
-  <!-- Github repo SDK -->
-  <include name="nova-wenbo_github.xml" />
+  
 
   <remote  name="origin"   
            fetch="https://github.com/flintiness"
@@ -16,5 +15,7 @@
   <project path="linux/LossPackage" name="LossPackage" groups="flintiness" />
   <project path="android/AndroidLogrorate" name="AndroidLogrorate" groups="flintiness" />
 
+  <!-- Github repo SDK -->
+  <include name="nova-wenbo_github.xml" />
 
 </manifest>
