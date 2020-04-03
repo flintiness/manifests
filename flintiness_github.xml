@@ -16,6 +16,6 @@
   <project path="android/AndroidLogrorate" name="AndroidLogrorate" groups="flintiness" />
 
   <!-- Github repo SDK -->
-  <include name="nova-wenbo_github.xml" />
+  <!--<include name="nova-wenbo_github.xml"/>  -->
 
 </manifest>
