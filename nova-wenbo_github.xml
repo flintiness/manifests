@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+  <remote  name="origin"   
+           fetch="https://github.com/nova-wenbo"
+           review="http://gerrit.allwinnertech.com:8081/ssh_info" />
+
+  <default revision="master"
+           remote="origin"
+           sync-j="4" />
+
+
+  <project path="nova-wenbo/cJSON" name="cJSON" groups="nova-wenbo" />
+  <project path="nova-wenbo/free-programming-books" name="free-programming-books" groups="nova-wenbo" />
+  <project path="nova-wenbo/rtk-imx" name="rtk-imx" groups="nova-wenbo" />
+
+
+</manifest>
